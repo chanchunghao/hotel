@@ -1,0 +1,39 @@
+acme.api.offers.index:
+    path: /offers
+    defaults: { _controller: AcmeHotelBundle:Offer:index }
+    requirements:
+        _method: GET
+    options:
+        expose: true
+
+acme.api.offers.show:
+    path: /offers/{id}
+    defaults: { _controller: AcmeHotelBundle:Offer:show }
+    requirements:
+        _method: GET
+    options:
+        expose: true
+
+acme.api.offers.create:
+    path: /offers
+    defaults: { _controller: AcmeHotelBundle:Offer:create }
+    requirements:
+        _method: POST
+    options:
+        expose: true
+
+acme.api.offers.update:
+    path: /offers/{id}
+    defaults: { _controller: AcmeHotelBundle:Offer:update }
+    requirements:
+        _method: PUT
+    options:
+        expose: true
+
+acme.api.offers.delete:
+    path: /offers/{id}
+    defaults: { _controller: AcmeHotelBundle:Offer:delete }
+    requirements:
+        _method: DELETE
+    options:
+        expose: true

@@ -1,0 +1,9 @@
+Acme\Component\Hotel\Model\Offer:
+    searchBy: []
+    filterBy: []
+    sortBy: [name, date]
+
+Acme\Component\Hotel\Model\Room:
+    searchBy: [name]
+    filterBy: [offer]
+    sortBy: [name]

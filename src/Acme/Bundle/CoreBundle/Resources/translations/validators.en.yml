@@ -1,0 +1,11 @@
+room:
+    name:
+        long: Room name cannot be longer than {{ limit }} characters.
+
+offer:
+    date:
+        blank: Date is required.
+        invalid: Date is invalid.
+        past: Date must be in the future.
+    rooms:
+        empty: No rooms available.

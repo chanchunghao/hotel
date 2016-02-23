@@ -1,0 +1,102 @@
+parameters:
+    acme.criteria.mapping.path: "@@AcmeCoreBundle/Resources/config/criteria.yml"
+
+    acme.factory.criteria.class: Acme\Component\Resource\Criteria\CriteriaFactory
+    acme.factory.response_data.class: Acme\Bundle\ApiBundle\Response\ResponseDataFactory
+
+    acme.handler.request.class: Acme\Bundle\ApiBundle\Request\RequestHandler
+
+    acme.driver.criteria.class: Acme\Component\Resource\Criteria\YamlDriver
+
+    acme.model.offer.class: Acme\Component\Hotel\Model\Offer
+    acme.model.room.class: Acme\Component\Hotel\Model\Room
+
+    acme.map.offer.class: Acme\Bundle\CoreBundle\Mapping\OfferMap
+    acme.map.room.class: Acme\Bundle\CoreBundle\Mapping\RoomMap
+
+    acme.repository.offer.class: Acme\Bundle\ResourceBundle\Repository\EntityRepository
+    acme.repository.room.class: Acme\Bundle\ResourceBundle\Repository\EntityRepository
+
+    acme.manager.offer.class: Acme\Bundle\ResourceBundle\Manager\ResourceManager
+    acme.manager.room.class: Acme\Bundle\ResourceBundle\Manager\ResourceManager
+
+    acme.builder.offer.class: Acme\Bundle\HotelBundle\Service\OfferBuilder
+    acme.finder.offer.class: Acme\Bundle\HotelBundle\Service\OfferFinder
+
+services:
+    # Driver
+    acme.driver.criteria:
+        class: %acme.driver.criteria.class%
+        arguments: [@file_locator, %acme.criteria.mapping.path%]
+
+    # Factory
+    acme.factory.criteria:
+        class: %acme.factory.criteria.class%
+        arguments: [@file_locator, @acme.driver.criteria]
+
+    acme.factory.response_data:
+        scope: prototype
+        class: %acme.factory.response_data.class%
+
+    # Handler
+    acme.handler.request:
+        class: %acme.handler.request.class%
+        arguments: [@acme.driver.criteria]
+
+    # Map
+    acme.map.offer:
+        class: %acme.map.offer.class%
+        tags:
+            - { name: bcc_auto_mapper.map }
+
+    acme.map.room:
+        class: %acme.map.room.class%
+        tags:
+            - { name: bcc_auto_mapper.map }
+
+    # Repository
+    acme.repository.offer:
+        class: %acme.repository.offer.class%
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: [%acme.model.offer.class%]
+
+    acme.repository.room:
+        class: %acme.repository.room.class%
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: [%acme.model.room.class%]
+
+    # Manager
+    acme.manager.offer:
+        class: %acme.manager.offer.class%
+        arguments:
+            - %acme.model.offer.class%
+            - @validator
+            - @doctrine.orm.default_entity_manager
+            - @acme.repository.offer
+            - @acme.factory.criteria
+        calls:
+            - [setDispatcher, ["@event_dispatcher"]]
+            - [setMapper, ["@bcc_auto_mapper.mapper"]]
+
+    acme.manager.room:
+        class: %acme.manager.room.class%
+        arguments:
+            - @validator
+            - @doctrine.orm.default_entity_manager
+            - @acme.repository.room
+            - @acme.factory.criteria
+        calls:
+            - [setDispatcher, ["@event_dispatcher"]]
+            - [setMapper, ["@bcc_auto_mapper.mapper"]]
+
+    # Finder
+    acme.finder.offer:
+        class: %acme.finder.offer.class%
+        arguments: [%request_url_format%]
+
+    # Builder
+    acme.builder.offer:
+        class: %acme.builder.offer.class%
+        arguments: [@acme.finder.offer]

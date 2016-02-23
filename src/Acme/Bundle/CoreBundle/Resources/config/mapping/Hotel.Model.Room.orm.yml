@@ -1,0 +1,22 @@
+Acme\Component\Hotel\Model\Room:
+    type: entity
+    table: rooms
+    repositoryClass: Acme\Bundle\ResourceBundle\Repository\EntityRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            nullable: true
+            type: string
+            length: 255
+    manyToOne:
+        offer:
+            targetEntity: Acme\Component\Hotel\Model\Offer
+            inversedBy: offers
+            joinColumn:
+                name: offer_id
+                referencedColumnName: id

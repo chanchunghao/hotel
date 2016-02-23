@@ -1,0 +1,6 @@
+<h1>{{ data.date|date('d/m/Y') }}</h1>
+<ul>
+    {% for room in data.rooms %}
+        <li>{{ room.name }}</li>
+    {% endfor %}
+</ul>

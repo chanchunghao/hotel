@@ -1,0 +1,20 @@
+Acme\Component\Hotel\Model\Offer:
+    type: entity
+    table: offers
+    repositoryClass: Acme\Bundle\ResourceBundle\Repository\EntityRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            column: date
+            nullable: true
+            type: datetime
+    oneToMany:
+        rooms:
+            targetEntity: Acme\Component\Hotel\Model\Room
+            mappedBy: offer
+            cascade: [persist, merge, remove]
+            orphanRemoval: true

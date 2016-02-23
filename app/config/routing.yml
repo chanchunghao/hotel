@@ -1,0 +1,4 @@
+acme.api:
+    resource: "@AcmeApiBundle/Resources/config/routing.yml"
+    prefix:   /api/v1
+    defaults: {_format: json}

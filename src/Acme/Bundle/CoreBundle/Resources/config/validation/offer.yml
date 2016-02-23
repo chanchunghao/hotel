@@ -1,0 +1,14 @@
+Acme\Component\Hotel\Model\Offer:
+    properties:
+        date:
+            - NotBlank:
+                message: offer.date.blank
+            - DateTime:
+                message: offer.date.invalid
+            - GreaterThanOrEqual:
+                value: today
+                message: offer.date.past
+        rooms:
+            - Count:
+                min: 1
+                minMessage: offer.rooms.empty

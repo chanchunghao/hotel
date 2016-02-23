@@ -1,0 +1,6 @@
+Acme\Component\Hotel\Model\Room:
+    properties:
+        name:
+            - Length:
+                max: 255
+                maxMessage: room.name.long

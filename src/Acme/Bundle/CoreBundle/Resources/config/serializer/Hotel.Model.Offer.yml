@@ -1,0 +1,16 @@
+Acme\Component\Hotel\Model\Offer:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            serialized_name: id
+        name:
+            expose: true
+            serialized_name: name
+        date:
+            expose: true
+            serialized_name: date
+        rooms:
+            expose: true
+            serialized_name: rooms
+
