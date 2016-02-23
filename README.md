@@ -26,15 +26,19 @@ Hotel project
 1. Run unit tests - `bin/phpunit`
 
 ## Architecture Overview
+
 1. Resource Layer
-We created an abstraction on top of Doctrine, in order to have a consistent and flexible way to manage all the resources. By “resource” we understand every model in the application. Simplest examples of resources are “offer”, “room” and so on...
 
-Resource management system lives in the AcmeResourceBundle and can be used in any Symfony2 bundles.
+   - We created an abstraction on top of Doctrine, in order to have a consistent and flexible way to manage all the resources. By “resource” we understand every model in the application. Simplest examples of resources are “offer”, “room” and so on...
 
-Let us take the “offer” resource as an example. By default, It is represented by Acme\Component\Core\Model\Offer class and implement proper OfferInterface.
+   - Resource management system lives in the AcmeResourceBundle and can be used in any Symfony2 bundles.
+
+   - Let us take the “offer” resource as an example. By default, It is represented by Acme\Component\Core\Model\Offer class and implement proper OfferInterface.
 
 2. Services
-For every resource we have three very important services available:
+
+   For every resource we have three very important services available:
+
    - Operator (manager, builder...): services handle business logic. 
    - Repository: Repository is defined as a service for every resource and shares the API with standard Doctrine ObjectRepository.
    - Controller: This service is the most important for every resource and provides a format agnostic CRUD controller with the following actions:
@@ -47,4 +51,5 @@ For every resource we have three very important services available:
    As you can see, these actions match the common operations in any REST API and yes, they are format agnostic. That means, all controllers can serve HTML, JSON or XML, depending on what do you request.
 
 3. Core Interface
-AcmeCoreBundle, which is the glue for all other bundles. It is the integration layer of Core component.
+
+   - AcmeCoreBundle, which is the glue for all other bundles. It is the integration layer of Core component.
