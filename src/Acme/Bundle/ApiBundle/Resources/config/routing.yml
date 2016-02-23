@@ -22,13 +22,13 @@ acme.api.offers.create:
     options:
         expose: true
 
-acme.api.offers.update:
-    path: /offers/{id}
-    defaults: { _controller: AcmeHotelBundle:Offer:update }
-    requirements:
-        _method: PUT
-    options:
-        expose: true
+#acme.api.offers.update:
+#    path: /offers/{id}
+#    defaults: { _controller: AcmeHotelBundle:Offer:update }
+#    requirements:
+#        _method: PUT
+#    options:
+#        expose: true
 
 acme.api.offers.delete:
     path: /offers/{id}
