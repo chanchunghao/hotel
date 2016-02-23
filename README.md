@@ -33,7 +33,7 @@ Hotel project
 
    - Resource management system lives in the AcmeResourceBundle and can be used in any Symfony2 bundles.
 
-   - Let us take the “offer” resource as an example. By default, It is represented by Acme\Component\Core\Model\Offer class and implement proper OfferInterface.
+   - Let us take the “offer” resource as an example. By default, It is represented by Acme\Component\Hotel\Model\Offer class and implement proper OfferInterface.
 
 2. Services
 
